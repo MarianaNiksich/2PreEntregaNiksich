@@ -54,20 +54,23 @@ let libros = [
 
 let productos = libros.map(libros => { return new Producto(libros.id, libros.titulo, libros.autor, libros.genero, libros.precio) })
 
-console.log(productos)
-
 let carrito = []
 let listaProductos = "Para comprar seleccione numero del libro \n Seleccione 10 para filtrar por genero \n seleccione 0 para salir\n" + productos.map(productos => productos.id + " " + productos.nombre()).join("\n")
-console.log(listaProductos)
+
 let listaCategoria = "Seleccione un genero \n" + ["literatura", "idiomas"].join("\n")
 
 do {
-    let opcion = Number(prompt(listaProductos))
-    let libroSeleccionado = productos.find(productos => productos.id === opcion && productos.id != 10)
+    opcion = Number(prompt(listaProductos))
     if (opcion === 10) {
         let libroCategoria = prompt(listaCategoria).toLowerCase()
         let libroGenero = productos.filter(productos => productos.genero == libroCategoria)
-        console.log(libroGenero)
-        alert(JSON.stringifylibroGenero)
+        alert(JSON.stringify(libroGenero))
+    } else {
+        if (opcion != 10) {
+            let libroSeleccionado = productos.find(productos => productos.id === opcion && productos.id != 10)
+            carrito.push({ id: libroSeleccionado.id, nombre: libroSeleccionado.titulo, autor: libroSeleccionado.autor, precioUnidad: libroSeleccionado.precio, subtotal: libroSeleccionado.precio, unidades: 1 })
+            console.log(carrito)
+
+        }
     }
 } while (opcion != 0)
